@@ -1,15 +1,20 @@
 const express = require('express');
-const ctrl = require("../../controllers/contacts");
-const {ctrlWrapper} = require("../../helpers");
+
+const {validation, ctrlWrapper} = require("../../helpers");
+const {joiSchema, favoriteJoiSchema} = require("../../models/contact");
+const {contacts: ctrl} = require("../../controllers")
+
 const router = express.Router();
 
 router.get("/", ctrlWrapper(ctrl.getAll));
 
 router.get("/:contactId", ctrlWrapper(ctrl.getById));
 
-router.post("/", ctrlWrapper(ctrl.add));
+router.post("/", validation(joiSchema), ctrlWrapper(ctrl.add));
 
-router.put("/:contactId", ctrlWrapper(ctrl.updateById));
+router.put("/:contactId", validation(joiSchema), ctrlWrapper(ctrl.updateById));
+
+router.patch("/:contactId/favorite", validation(favoriteJoiSchema), ctrlWrapper(ctrl.updateStatusContact));
 
 router.delete("/:contactId", ctrlWrapper(ctrl.removeById));
 
