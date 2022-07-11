@@ -1,6 +1,8 @@
 const express = require('express');
 
-const {auth, validation, ctrlWrapper} = require("../../helpers");
+const { ctrlWrapper } = require("../../helpers");
+const { auth, validation} = require("../../middlewares");
+
 const {joiSchema, favoriteJoiSchema} = require("../../models/contact");
 const {contacts: ctrl} = require("../../controllers")
 

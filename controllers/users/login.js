@@ -22,7 +22,7 @@ const login = async (req, res) => {
         data: {
             token
         }
-    })
+    })    
 }
 
 module.exports = login;
