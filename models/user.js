@@ -41,6 +41,10 @@ const joiRegisterSchema = Joi.object({
     token: Joi.string()
 });
 
+const joiEmailSchema = Joi.object({
+    email: Joi.string().email().required(),
+});
+
 const joiLoginSchema = Joi.object({
     password: Joi.string().min(6).required(),
     email: Joi.string().email().required(),
@@ -56,6 +60,7 @@ const User = model("user", userSchema);
 module.exports = {
     User,
     joiRegisterSchema,
+    joiEmailSchema,
     joiLoginSchema,
     subscriptionJoiSchema
 }

@@ -1,4 +1,5 @@
 const register = require("./register");
+const resendVerifyEmail = require("./resendVerifyEmail");
 const login = require("./login");
 const getCurrent = require("./getCurrent");
 const logout = require("./logout");
@@ -8,6 +9,7 @@ const verifyEmail = require("./verifyEmail");
 
 module.exports = {
     register,
+    resendVerifyEmail,
     login,
     getCurrent,
     logout,
