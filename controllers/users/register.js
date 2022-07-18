@@ -1,4 +1,4 @@
-const { Conflict } = require("http-errors");
+const { createError } = require("../../helpers");
 const bcrypt = require("bcryptjs");
 const gravatar = require("gravatar");
 const jimp = require("jimp");
@@ -11,7 +11,7 @@ const register = async (req, res) => {
     const { email, password, subscription } = req.body;
     const user = await User.findOne({ email });
     if (user) {
-        throw new Conflict("Email in use")
+        throw createError(409, "Email in use");
     }
     const verificationToken = ObjectID();
     const avatarURL = gravatar.url(email);
