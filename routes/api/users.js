@@ -3,7 +3,7 @@ const express = require('express');
 const { ctrlWrapper } = require("../../helpers");
 const { auth, validation, upload } = require("../../middlewares");
 const { auth: ctrl } = require("../../controllers");
-const { joiRegisterSchema, joiLoginSchema, subscriptionJoiSchema } = require("../../models/user");
+const { joiRegisterSchema, joiEmailSchema, joiLoginSchema, subscriptionJoiSchema } = require("../../models/user");
 
 const router = express.Router();
 
@@ -14,6 +14,10 @@ router.post("/login", validation(joiLoginSchema), ctrlWrapper(ctrl.login));
 router.get("/current", auth, ctrlWrapper(ctrl.getCurrent));
 
 router.get("/logout", auth, ctrlWrapper(ctrl.logout));
+
+router.get("/verify/:verificationToken", ctrlWrapper(ctrl.verifyEmail));
+
+router.post("/verify", validation(joiEmailSchema), ctrlWrapper(ctrl.resendVerifyEmail));
 
 router.patch("/", auth, validation(subscriptionJoiSchema), ctrlWrapper(ctrl.updateSubscription));
 
